@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour {
 
 	/*****************************************/
-	/* Public                                */
+	/* Public variables                      */
 	/*****************************************/
 
 	// Must be 1 or 2
@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour {
 
 
 	/*****************************************/
-	/* Private                               */
+	/* Private variables                     */
 	/*****************************************/
 
 	// Velocity to use on button presses
@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour {
 
 
 	/*****************************************/
-	/* Public                                */
+	/* Core game functions                   */
 	/*****************************************/
 
 	// Use this for initialization
@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour {
 	
 
 	/*****************************************/
-	/* Private                               */
+	/* Private methods                       */
 	/*****************************************/
 
 	// Get the button name given "Up", "Down", "Left", and "Right"

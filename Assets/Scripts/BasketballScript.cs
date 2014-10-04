@@ -3,12 +3,21 @@ using System.Collections;
 
 public class BasketballScript : MonoBehaviour {
 
+	/*****************************************/
+	/* Public variables                      */
+	/*****************************************/
+
 	// Player names
 	public string player1Name = "player1";
 	public string player2Name = "player2";
 
 	// Number of the player currently holding the ball
 	private int ballHolder = 0;
+
+
+	/*****************************************/
+	/* Private variables                     */
+	/*****************************************/
 
 	// True if the ball is currently being held by a player
 	private bool playerIsHoldingBall = false;
@@ -18,7 +27,35 @@ public class BasketballScript : MonoBehaviour {
 
 
 	/*****************************************/
-	/* Public                                */
+	/* Public methods                        */
+	/*****************************************/
+	
+	// Prevent client from changing the private value
+	public int GetBallHolder() {
+		return ballHolder;
+	}
+	
+	// Reset the ball to its original position/velocity
+	public void Reset() {
+		// Reset initial variables
+		ballHolder = 0;
+		playerIsHoldingBall = false;
+		playerReference = null;
+		
+		// Reset position
+		Vector2 originalPosition = new Vector2 (0, 2);
+		transform.position = originalPosition;
+		
+		// Reset velocity
+		rigidbody2D.velocity = new Vector2 (0, 0);
+		
+		// Re-enable collision detection
+		collider2D.enabled = true;
+	}
+
+
+	/*****************************************/
+	/* Core game methods                     */
 	/*****************************************/
 
 	// Use this for initialization
@@ -46,32 +83,9 @@ public class BasketballScript : MonoBehaviour {
 		}
 	}
 
-	// Prevent client from changing the private value
-	public int GetBallHolder() {
-		return ballHolder;
-	}
-
-	// Reset the ball to its original position/velocity
-	public void Reset() {
-		// Reset initial variables
-		ballHolder = 0;
-		playerIsHoldingBall = false;
-		playerReference = null;
-
-		// Reset position
-		Vector2 originalPosition = new Vector2 (0, 2);
-		transform.position = originalPosition;
-
-		// Reset velocity
-		rigidbody2D.velocity = new Vector2 (0, 0);
-
-		// Re-enable collision detection
-		collider2D.enabled = true;
-	}
-
 
 	/*****************************************/
-	/* Private                               */
+	/* Private methods                       */
 	/*****************************************/
 
 	// Return true if the object is a player

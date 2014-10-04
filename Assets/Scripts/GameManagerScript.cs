@@ -3,8 +3,17 @@ using System.Collections;
 
 public class GameManagerScript : MonoBehaviour {
 
+	/*****************************************/
+	/* Public variables                      */
+	/*****************************************/
+
 	// Skin for custom fonts
 	public GUISkin bettskin;
+
+
+	/*****************************************/
+	/* Private variables                     */
+	/*****************************************/
 
 	// Keep the scores of the players
 	private int player1Score = 0;
@@ -12,15 +21,10 @@ public class GameManagerScript : MonoBehaviour {
 	private string player1ScoreString = "P1: 0";
 	private string player2ScoreString = "P2: 0";
 
-	// Use this for initialization
-	void Start () {
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
+	/*****************************************/
+	/* Public methods                        */
+	/*****************************************/
 
 	public void GivePlayerPoint(int playerNum) {
 		if (playerNum == 1) {
@@ -31,6 +35,21 @@ public class GameManagerScript : MonoBehaviour {
 		UpdateScoreStrings ();
 	}
 
+
+	/*****************************************/
+	/* Core game methods                     */
+	/*****************************************/
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
 	void OnGUI () {
 		GUI.skin = bettskin;
 		// left, top, width, height
@@ -38,9 +57,10 @@ public class GameManagerScript : MonoBehaviour {
 		GUI.Label (new Rect (Screen.width - 120, 20, 100, 50), player2ScoreString);
 	}
 
-	public void test() {
-		print ("Yay!");
-	}
+
+	/*****************************************/
+	/* Private methods                       */
+	/*****************************************/
 
 	// Update the value of the score strings
 	private void UpdateScoreStrings() {

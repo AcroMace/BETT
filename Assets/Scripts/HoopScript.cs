@@ -3,6 +3,10 @@ using System.Collections;
 
 public class HoopScript : MonoBehaviour {
 
+	/*****************************************/
+	/* Public variables                      */
+	/*****************************************/
+
 	// Player who can score on this net
 	public int playerNum = 1;
 
@@ -14,7 +18,7 @@ public class HoopScript : MonoBehaviour {
 
 
 	/*****************************************/
-	/* Public                                */
+	/* Core game methods                     */
 	/*****************************************/
 
 	// Use this for initialization
@@ -39,8 +43,9 @@ public class HoopScript : MonoBehaviour {
 		}
 	}
 
+
 	/*****************************************/
-	/* Private                               */
+	/* Private methods                       */
 	/*****************************************/
 
 	// Return a player's name given their number

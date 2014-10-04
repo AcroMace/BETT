@@ -3,6 +3,10 @@ using System.Collections;
 
 public class BounceScript : MonoBehaviour {
 
+	/*****************************************/
+	/* Public variables                      */
+	/*****************************************/
+
 	// Object to bounce on
 	public string bounceTarget = "Trampoline";
 
@@ -13,9 +17,18 @@ public class BounceScript : MonoBehaviour {
 	// Multiply the vertical velocity by this factor
 	public float bounceFactor = 1f;
 
+
+	/*****************************************/
+	/* Private variables                     */
+	/*****************************************/
+
 	// Value of the last velocity recorded by FixedUpdate
 	private Vector2 lastVelocity;
-	
+
+
+	/*****************************************/
+	/* Core game methods                     */
+	/*****************************************/
 
 	// Update is called once per frame
 	void FixedUpdate () {
