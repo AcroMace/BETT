@@ -51,6 +51,21 @@ public class BasketballScript : MonoBehaviour {
 		return ballHolder;
 	}
 
+	// Reset the ball to its original position/velocity
+	public void Reset() {
+		// Reset initial variables
+		ballHolder = 0;
+		playerIsHoldingBall = false;
+		playerReference = null;
+
+		// Reset position
+		Vector2 originalPosition = new Vector2 (0, 2);
+		transform.position = originalPosition;
+
+		// Re-enable collision detection
+		collider2D.enabled = true;
+	}
+
 
 	/*****************************************/
 	/* Private                               */

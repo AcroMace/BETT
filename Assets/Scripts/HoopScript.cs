@@ -30,6 +30,7 @@ public class HoopScript : MonoBehaviour {
 		if (player.name == PlayerName(playerNum)) {
 			if (basketball.GetBallHolder() == playerNum) {
 				print("Player " + playerNum + " scores!");
+				basketball.Reset();
 			}
 		}
 	}
