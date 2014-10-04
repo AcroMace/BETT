@@ -46,7 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BasketballScript.cs" />
      <Compile Include="Assets\Scripts\BounceScript.cs" />
+     <Compile Include="Assets\Scripts\HoopScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\TrampolineScript.cs" />
   </ItemGroup>

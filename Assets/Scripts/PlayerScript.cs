@@ -19,9 +19,6 @@ public class PlayerScript : MonoBehaviour {
 	private float velocityX = 5f;
 	private float velocityY = 20f;
 
-	// Whether the player currently possesses the ball
-	private bool hasBall = false;
-	
 
 	/*****************************************/
 	/* Public                                */
@@ -44,7 +41,7 @@ public class PlayerScript : MonoBehaviour {
 			rigidbody2D.AddForce (new Vector2(-velocityX, 0));
 		}
 	}
-
+	
 
 	/*****************************************/
 	/* Private                               */
