@@ -25,7 +25,7 @@ public class HoopScript : MonoBehaviour {
 	}
 
 	// Give the player a point if they score
-	void OnCollisionEnter2D (Collision2D collided) {
+	void OnTriggerEnter2D (Collider2D collided) {
 		GameObject player = collided.gameObject;
 		if (player.name == PlayerName(playerNum)) {
 			if (basketball.GetBallHolder() == playerNum) {
