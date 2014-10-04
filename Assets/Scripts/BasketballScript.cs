@@ -62,6 +62,9 @@ public class BasketballScript : MonoBehaviour {
 		Vector2 originalPosition = new Vector2 (0, 2);
 		transform.position = originalPosition;
 
+		// Reset velocity
+		rigidbody2D.velocity = new Vector2 (0, 0);
+
 		// Re-enable collision detection
 		collider2D.enabled = true;
 	}

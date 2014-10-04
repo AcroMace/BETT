@@ -9,6 +9,9 @@ public class HoopScript : MonoBehaviour {
 	// Reference to the basketball
 	public BasketballScript basketball;
 
+	// Reference to the game manager
+	public GameManagerScript gamemanager;
+
 
 	/*****************************************/
 	/* Public                                */
@@ -30,6 +33,7 @@ public class HoopScript : MonoBehaviour {
 		if (player.name == PlayerName(playerNum)) {
 			if (basketball.GetBallHolder() == playerNum) {
 				print("Player " + playerNum + " scores!");
+				gamemanager.GivePlayerPoint(playerNum);
 				basketball.Reset();
 			}
 		}
