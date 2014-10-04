@@ -34,19 +34,21 @@ public class BasketballScript : MonoBehaviour {
 		}
 	}
 
-
 	void OnCollisionEnter2D(Collision2D collided) {
-		// Get the name of the object collided with
-		string name = collided.gameObject.name;
-		
+		GameObject player = collided.gameObject;
 		// Get reference to the player and enable holding it
-		if (IsPlayer(name)) {
+		if (IsPlayer(player.name)) {
 			playerIsHoldingBall = true;
-			ballHolder = PlayerNumber(name);
-			playerReference = collided.gameObject;
+			ballHolder = PlayerNumber(player.name);
+			playerReference = player;
 			// Stop weird jerking motions
 			collider2D.enabled = false;
 		}
+	}
+
+	// Prevent client from changing the private value
+	public int GetBallHolder() {
+		return ballHolder;
 	}
 
 

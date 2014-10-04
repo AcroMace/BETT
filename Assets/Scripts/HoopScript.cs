@@ -6,9 +6,17 @@ public class HoopScript : MonoBehaviour {
 	// Player who can score on this net
 	public int playerNum = 1;
 
+	// Reference to the basketball
+	public BasketballScript basketball;
+
+
+	/*****************************************/
+	/* Public                                */
+	/*****************************************/
+
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -18,12 +26,29 @@ public class HoopScript : MonoBehaviour {
 
 	// Give the player a point if they score
 	void OnCollisionEnter2D (Collision2D collided) {
-		string name = collided.gameObject.name;
-		if (name == "player1" && playerNum == 1) {
-			print("Player 1 scores!");
-		} else if (name == "player2" && playerNum == 2) {
-			print("Player 2 scores!");
+		GameObject player = collided.gameObject;
+		if (player.name == PlayerName(playerNum)) {
+			if (basketball.GetBallHolder() == playerNum) {
+				print("Player " + playerNum + " scores!");
+			}
 		}
 	}
+
+	/*****************************************/
+	/* Private                               */
+	/*****************************************/
+
+	// Return a player's name given their number
+	private string PlayerName(int number) {
+		if (number == 1) {
+			return "player1";
+		} else if (number == 2) {
+			return "player2";
+		} else {
+			print ("ERROR: Invalid player number");
+			return "Error";
+		}
+	}
+
 
 }
