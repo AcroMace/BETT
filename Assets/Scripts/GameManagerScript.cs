@@ -21,6 +21,12 @@ public class GameManagerScript : MonoBehaviour {
 	private string player1ScoreString = "P1: 0";
 	private string player2ScoreString = "P2: 0";
 
+	// Dimensions for the score placement
+	private int scoreWidth = 100;
+	private int scoreHeight = 50;
+	private int scoreFromTop = 20;
+	private int scoreFromSide = 20;
+
 
 	/*****************************************/
 	/* Public methods                        */
@@ -53,8 +59,12 @@ public class GameManagerScript : MonoBehaviour {
 	void OnGUI () {
 		GUI.skin = bettskin;
 		// left, top, width, height
-		GUI.Label (new Rect (20, 20, 100, 50), player1ScoreString);
-		GUI.Label (new Rect (Screen.width - 120, 20, 100, 50), player2ScoreString);
+		GUI.Label (new Rect (scoreFromSide, scoreFromTop,
+		                     scoreWidth, scoreHeight),
+		           player1ScoreString);
+		GUI.Label (new Rect (Screen.width - scoreFromSide - scoreWidth,
+		                     scoreFromTop, scoreWidth, scoreHeight),
+		           player2ScoreString);
 	}
 
 
