@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour {
 	/*****************************************/
 
 	// Must be 1 or 2
-	public int player_num = 1;
+	public int playerNum = 1;
 
 
 	/*****************************************/
@@ -16,8 +16,11 @@ public class PlayerScript : MonoBehaviour {
 	/*****************************************/
 
 	// Velocity to use on button presses
-	private float velocity_x = 5f;
-	private float velocity_y = 20f;
+	private float velocityX = 5f;
+	private float velocityY = 20f;
+
+	// Whether the player currently possesses the ball
+	private bool hasBall = false;
 	
 
 	/*****************************************/
@@ -32,13 +35,13 @@ public class PlayerScript : MonoBehaviour {
 	// Update for physics
 	void FixedUpdate() {
 		// Navigation updates
-		if (Input.GetButton (get_button_name("Down"))) {
-			rigidbody2D.AddForce (new Vector2(0, -velocity_y));
+		if (Input.GetButton (GetButtonName("Down"))) {
+			rigidbody2D.AddForce (new Vector2(0, -velocityY));
 		}
-		if (Input.GetButton (get_button_name("Right"))) {
-			rigidbody2D.AddForce (new Vector2(velocity_x, 0));
-		} else if (Input.GetButton (get_button_name ("Left"))) {
-			rigidbody2D.AddForce (new Vector2(-velocity_x, 0));
+		if (Input.GetButton (GetButtonName("Right"))) {
+			rigidbody2D.AddForce (new Vector2(velocityX, 0));
+		} else if (Input.GetButton (GetButtonName ("Left"))) {
+			rigidbody2D.AddForce (new Vector2(-velocityX, 0));
 		}
 	}
 
@@ -48,7 +51,7 @@ public class PlayerScript : MonoBehaviour {
 	/*****************************************/
 
 	// Get the button name given "Up", "Down", "Left", and "Right"
-	private string get_button_name(string direction) {
-		return "Player" + player_num + "_" + direction;
+	private string GetButtonName(string direction) {
+		return "Player" + playerNum + "_" + direction;
 	}
 }

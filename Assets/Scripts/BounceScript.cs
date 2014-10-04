@@ -8,7 +8,7 @@ public class BounceScript : MonoBehaviour {
 
 	// Minimum vertical velocity
 	// Prevents players getting stuck on the trampoline
-	public float minimumVelocity = 5f;
+	public float minimumVelocity = 7f;
 
 	// Multiply the vertical velocity by this factor
 	public float bounceFactor = 1f;
