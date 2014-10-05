@@ -82,25 +82,20 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Reset the player, basketball, and scores
 	public void Reset() {
+		// Reset the basketball
+		basketball.Reset ();
+		// Reset player related variables
 		player1Score = 0;
 		player2Score = 0;
 		UpdateScoreStrings ();
-		basketball.Reset ();
 		player1.Reset ();
 		player2.Reset ();
 		// Delete all obstacles
-		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-		for (int i = 0; i < numObstacles; i++) {
-			Destroy (obstacles[i]);
-		}
 		numObstacles = 0;
 		obstacleGrid = new bool[8, 8];
 		// Delete scenary
-		GameObject[] shells = GameObject.FindGameObjectsWithTag ("Death");
-		int numOfShells = shells.Length;
-		for (int i = 0; i < numOfShells; i++) {
-			Destroy(shells[i]);
-		}
+		DeleteAllObjectsWithTag ("Obstacle");
+		DeleteAllObjectsWithTag ("Death");
 	}
 
 	public void SpawnObstacle() {
@@ -185,6 +180,15 @@ public class GameManagerScript : MonoBehaviour {
 	private void UpdateScoreStrings() {
 		player1ScoreString = "P1: " + player1Score;
 		player2ScoreString = "P2: " + player2Score;
+	}
+
+	// Delete all objects with a tag
+	private void DeleteAllObjectsWithTag(string tag) {
+		GameObject[] instances = GameObject.FindGameObjectsWithTag (tag);
+		int instancesLength = instances.Length;
+		for (int i = 0; i < instancesLength; i++) {
+			Destroy(instances[i]);
+		}
 	}
 
 

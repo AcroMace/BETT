@@ -56,6 +56,10 @@ TagManager:
     userID: 3
     uniqueID: 891404215
     locked: 0
+  - name: Shatter
+    userID: 8
+    uniqueID: 691830463
+    locked: 0
   - name: Hoops
     userID: 4
     uniqueID: 2237105083
