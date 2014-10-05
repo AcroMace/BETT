@@ -10,9 +10,9 @@ public class GameManagerScript : MonoBehaviour {
 	// Skin for custom fonts
 	public GUISkin bettskin;
 
-	// Player names
-	public string player1Name = "player1";
-	public string player2Name = "player2";
+	// Reference to player objects
+	public PlayerScript player1;
+	public PlayerScript player2;
 
 	// Reference to the basketball object
 	// Used by: HoopScript, PlayerScript
@@ -60,6 +60,16 @@ public class GameManagerScript : MonoBehaviour {
 		UpdateScoreStrings ();
 	}
 
+	// Reset the player, basketball, and scores
+	public void Reset() {
+		player1Score = 0;
+		player2Score = 0;
+		UpdateScoreStrings ();
+		basketball.Reset ();
+		player1.Reset ();
+		player2.Reset ();
+	}
+
 
 	/*****************************************/
 	/* Core game methods                     */
@@ -72,7 +82,9 @@ public class GameManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Reset ();
+		}
 	}
 
 	void OnGUI () {

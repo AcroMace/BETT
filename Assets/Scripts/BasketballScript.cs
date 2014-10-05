@@ -67,7 +67,13 @@ public class BasketballScript : MonoBehaviour {
 	void Update () {
 		// Fix the basketball's position to the player's position
 		if (playerIsHoldingBall) {
-			transform.position = playerReference.transform.position;
+			Vector2 playerPosition = playerReference.transform.position;
+			if (playerReference.transform.localScale.x > 0) {
+				playerPosition.x += 0.2f;
+			} else {
+				playerPosition.x -= 0.2f;
+			}
+			transform.position = playerPosition;
 		}
 	}
 
