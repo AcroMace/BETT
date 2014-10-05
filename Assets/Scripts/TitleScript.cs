@@ -14,10 +14,10 @@ public class TitleScript : MonoBehaviour {
 	}
 
 	void OnGUI() {
-//		if(GUI.Button (new Rect(10, 10, 50, 50), "Hello")) {
-//			Application.LoadLevel("BETT");
+//		if (Event.current.type == EventType.KeyDown) {
+//			Application.LoadLevel ("BETT");
 //		}
-		if (Event.current.type == EventType.KeyDown) {
+		if (Input.GetButtonDown ("Confirm")) {
 			Application.LoadLevel ("BETT");
 		}
 	}
