@@ -15,6 +15,16 @@ public class HoopScript : MonoBehaviour {
 
 
 	/*****************************************/
+	/* Public methods                        */
+	/*****************************************/
+
+	public void FlipLocation() {
+		Vector2 pos = transform.position;
+		transform.position = new Vector2(-pos.x, pos.y);
+	}
+
+
+	/*****************************************/
 	/* Core game methods                     */
 	/*****************************************/
 	

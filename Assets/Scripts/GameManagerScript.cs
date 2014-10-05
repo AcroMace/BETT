@@ -21,7 +21,14 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Reference to obstacle prefab
 	public Transform obstacle;
-	
+
+	// Reference to the background
+	public Transform background;
+
+	// References to the hoops
+	public HoopScript hoop1;
+	public HoopScript hoop2;
+
 	// Maximum number of obstacles on the scene
 	public int maximumObstacles = 5;
 
@@ -77,7 +84,8 @@ public class GameManagerScript : MonoBehaviour {
 		} else if (playerNum == 2) {
 			player2Score += 1;
 		}
-		UpdateScoreStrings ();
+		UpdateScoreStrings();
+		FlipScreen();
 	}
 
 	// Reset the player, basketball, and scores
@@ -189,6 +197,21 @@ public class GameManagerScript : MonoBehaviour {
 		for (int i = 0; i < instancesLength; i++) {
 			Destroy(instances[i]);
 		}
+	}
+
+	// Flips the location of the hoops and the screen
+	private void FlipScreen() {
+		player1.FlipSpawnPosition();
+		player2.FlipSpawnPosition();
+		hoop1.FlipLocation();
+		hoop2.FlipLocation();
+		FlipBackground();
+	}
+
+	// Flip the background image horizontally
+	private void FlipBackground() {
+		Vector2 bgScale = background.transform.localScale;
+		background.transform.localScale = new Vector2(-bgScale.x, bgScale.y);
 	}
 
 

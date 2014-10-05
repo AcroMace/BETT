@@ -26,6 +26,9 @@ public class PlayerScript : MonoBehaviour {
 	// False if the player is facing left
 	public bool facingRight = true;
 
+	// Respawn time in seconds
+	public int respawnTime = 3;
+
 	// Height to respawn player after death
 	public float respawnHeight = 4;
 
@@ -39,7 +42,7 @@ public class PlayerScript : MonoBehaviour {
 	private float velocityY = 20f;
 
 	// Store original position to use in reset
-	private Vector2 originalPosition;
+	private Vector2 spawnPosition;
 
 	// Vector when the player faces right
 	private float rightDirection;
@@ -49,11 +52,17 @@ public class PlayerScript : MonoBehaviour {
 	/* Public methods                        */
 	/*****************************************/
 
+	// Put player back to where it originally spawns
 	public void Reset() {
 		// Reset position and velocity
-		originalPosition.y = respawnHeight;
-		transform.position = originalPosition;
+		spawnPosition.y = respawnHeight;
+		transform.position = spawnPosition;
 		rigidbody2D.velocity = new Vector2 (0, 0);
+	}
+
+	// Horizontal flip of where the player spawns
+	public void FlipSpawnPosition() {
+		spawnPosition = new Vector2(-spawnPosition.x, spawnPosition.y);
 	}
 
 
@@ -63,7 +72,7 @@ public class PlayerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		originalPosition = transform.position;
+		spawnPosition = transform.position;
 		rightDirection = transform.localScale.x;
 		if(!facingRight) {
 			TurnLeft();
@@ -129,7 +138,7 @@ public class PlayerScript : MonoBehaviour {
 		// Remove the player from the scene
 		transform.position = new Vector2 (-5000, -5000);
 		// Wait 5 seconds
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(respawnTime);
 		Reset ();
 		// Make the player visible again
 		renderer.enabled = true;
