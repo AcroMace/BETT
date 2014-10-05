@@ -44,8 +44,8 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Maximum x and y coordinates for where the obstacle
 	// can spawn
-	private float obstacleMaxX = 5;
-	private float obstacleMaxY = 4;
+	private float obstacleMaxX = 4f;
+	private float obstacleMaxY = 4f;
 
 	// Current number of obstacles on the screen
 	private int numObstacles = 0;
@@ -85,7 +85,6 @@ public class GameManagerScript : MonoBehaviour {
 		player2.Reset ();
 		// Delete all obstacles
 		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-		int numOfObstacles = obstacles.Length;
 		for (int i = 0; i < numObstacles; i++) {
 			Destroy (obstacles[i]);
 		}
@@ -94,7 +93,20 @@ public class GameManagerScript : MonoBehaviour {
 
 	public void SpawnObstacle() {
 		if (numObstacles < maximumObstacles) {
-			float obstacleX = Random.Range (-obstacleMaxX, obstacleMaxX);
+			float obstacleX = 0;
+			// 2 possible x-coordinate values for the obstacle
+			// Doing this to prevent obstacle spawning right below
+			// the ball spawning point
+			float obstacleX1 = Random.Range (-obstacleMaxX,-0.5f);
+			float obstacleX2 = Random.Range (0.5f, obstacleMaxX);
+			// Which obstacle X to use
+			int obstacleXUse = Random.Range (0, 2); // Returns 0 or 1
+			if (obstacleXUse == 1) {
+				obstacleX = obstacleX1;
+			} else {
+				obstacleX = obstacleX2;
+			}
+			// Y-coordinate
 			float obstacleY = Random.Range (-obstacleMaxY, obstacleMaxY);
 			Instantiate (obstacle, new Vector2 (obstacleX, obstacleY), Quaternion.identity);
 			numObstacles++;

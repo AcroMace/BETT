@@ -10,9 +10,10 @@ public class BasketballScript : MonoBehaviour {
 	// Player names
 	public string player1Name = "player1";
 	public string player2Name = "player2";
-
-	// Number of the player currently holding the ball
-	private int ballHolder = 0;
+	
+	// Max force applied to ball when hitting an obstacle
+	public float maxObstacleForceX = 5f;
+	public float maxObstacleForceY = 2f;
 
 
 	/*****************************************/
@@ -21,6 +22,9 @@ public class BasketballScript : MonoBehaviour {
 
 	// True if the ball is currently being held by a player
 	private bool playerIsHoldingBall = false;
+
+	// Number of the player currently holding the ball
+	private int ballHolder = 0;
 
 	// Reference to the player currently holding the ball
 	private GameObject playerReference;
@@ -86,6 +90,11 @@ public class BasketballScript : MonoBehaviour {
 			playerReference = player;
 			// Stop weird jerking motions
 			collider2D.enabled = false;
+		} else if (player.tag == "Obstacle") {
+			float forceX = Random.Range(-maxObstacleForceX, maxObstacleForceX);
+			float forceY = Random.Range (-maxObstacleForceY, maxObstacleForceY);
+			Vector2 randForce = new Vector2(forceX, forceY);
+			rigidbody2D.AddForce(randForce);
 		}
 	}
 

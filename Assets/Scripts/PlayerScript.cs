@@ -20,6 +20,9 @@ public class PlayerScript : MonoBehaviour {
 	// False if the player is facing left
 	public bool facingRight = true;
 
+	// Height to respawn player after death
+	public float respawnHeight = 3;
+
 
 	/*****************************************/
 	/* Private variables                     */
@@ -42,6 +45,7 @@ public class PlayerScript : MonoBehaviour {
 
 	public void Reset() {
 		// Reset position and velocity
+		originalPosition.y = respawnHeight;
 		transform.position = originalPosition;
 		rigidbody2D.velocity = new Vector2 (0, 0);
 	}
