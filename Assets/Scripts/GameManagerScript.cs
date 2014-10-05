@@ -95,6 +95,12 @@ public class GameManagerScript : MonoBehaviour {
 		}
 		numObstacles = 0;
 		obstacleGrid = new bool[8, 8];
+		// Delete scenary
+		GameObject[] shells = GameObject.FindGameObjectsWithTag ("Death");
+		int numOfShells = shells.Length;
+		for (int i = 0; i < numOfShells; i++) {
+			Destroy(shells[i]);
+		}
 	}
 
 	public void SpawnObstacle() {

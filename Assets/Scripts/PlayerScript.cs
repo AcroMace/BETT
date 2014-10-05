@@ -19,6 +19,9 @@ public class PlayerScript : MonoBehaviour {
 	// Reference to the death prefab
 	public Transform death;
 
+	// Reference to the egg shatter animation prefab
+	public Transform shatter;
+
 	// Direction that the player is facing
 	// False if the player is facing left
 	public bool facingRight = true;
@@ -65,6 +68,8 @@ public class PlayerScript : MonoBehaviour {
 		if(!facingRight) {
 			TurnLeft();
 		}
+		// Put the particle system in the front
+		shatter.particleSystem.renderer.sortingLayerName = "Shatter";
 	}
 
 
@@ -111,10 +116,16 @@ public class PlayerScript : MonoBehaviour {
 	// Time out the player for 5 seconds
 	private IEnumerator Respawn() {
 		gm.ReleaseBallOnDeath(playerNum);
+		float xCoord = transform.position.x;
+		float yCoord = transform.position.y;
 		// Make the player invisible
 		renderer.enabled = false;
+		// Splatter the egg with random rotation
 		Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-		Instantiate (death, new Vector2 (transform.position.x, transform.position.y), rotation);
+		Instantiate (death, new Vector2 (xCoord, yCoord), rotation);
+		// Explode facing downwards
+		Quaternion downwards = Quaternion.Euler (90, 0, 0);
+		Instantiate (shatter, new Vector2 (xCoord, yCoord - 0.5f), downwards);
 		// Remove the player from the scene
 		transform.position = new Vector2 (-5000, -5000);
 		// Wait 5 seconds
@@ -123,6 +134,7 @@ public class PlayerScript : MonoBehaviour {
 		// Make the player visible again
 		renderer.enabled = true;
 	}
+
 
 	// Face direction of movement
 	private void TurnRight() {
