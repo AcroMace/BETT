@@ -65,6 +65,23 @@ public class PlayerScript : MonoBehaviour {
 		spawnPosition = new Vector2(-spawnPosition.x, spawnPosition.y);
 	}
 
+	// Kill player and remove them from the scene
+	public void Kill() {
+		gm.ReleaseBallOnDeath(playerNum);
+		float xCoord = transform.position.x;
+		float yCoord = transform.position.y;
+		// Make the player invisible
+		renderer.enabled = false;
+		// Splatter the egg with random rotation
+		Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+		Instantiate (death, new Vector2 (xCoord, yCoord), rotation);
+		// Explode facing downwards
+		Quaternion downwards = Quaternion.Euler (90, 0, 0);
+		Instantiate (shatter, new Vector2 (xCoord, yCoord - 0.5f), downwards);
+		// Remove the player from the scene
+		transform.position = new Vector2 (-5000, -5000);
+	}
+
 
 	/*****************************************/
 	/* Core game methods                   */
@@ -124,26 +141,14 @@ public class PlayerScript : MonoBehaviour {
 
 	// Time out the player for 5 seconds
 	private IEnumerator Respawn() {
-		gm.ReleaseBallOnDeath(playerNum);
-		float xCoord = transform.position.x;
-		float yCoord = transform.position.y;
-		// Make the player invisible
-		renderer.enabled = false;
-		// Splatter the egg with random rotation
-		Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-		Instantiate (death, new Vector2 (xCoord, yCoord), rotation);
-		// Explode facing downwards
-		Quaternion downwards = Quaternion.Euler (90, 0, 0);
-		Instantiate (shatter, new Vector2 (xCoord, yCoord - 0.5f), downwards);
-		// Remove the player from the scene
-		transform.position = new Vector2 (-5000, -5000);
+		Kill ();
 		// Wait 5 seconds
 		yield return new WaitForSeconds(respawnTime);
 		Reset ();
 		// Make the player visible again
 		renderer.enabled = true;
 	}
-
+	
 
 	// Face direction of movement
 	private void TurnRight() {

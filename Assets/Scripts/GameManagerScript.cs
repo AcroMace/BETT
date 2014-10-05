@@ -29,11 +29,14 @@ public class GameManagerScript : MonoBehaviour {
 	public HoopScript hoop1;
 	public HoopScript hoop2;
 
+	// Score needed for a player to win the game
+	public int winScore = 5;
+
 	// Maximum number of obstacles on the scene
 	public int maximumObstacles = 5;
 
 	// Rate at which new obstacles spawn in seconds
-	public float secPerSpawn = 5f;
+	public float secPerSpawn = 3f;
 
 
 	/*****************************************/
