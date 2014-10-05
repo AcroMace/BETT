@@ -16,12 +16,15 @@ public class PlayerScript : MonoBehaviour {
 	// Reference to the game manager
 	public GameManagerScript gm;
 
+	// Reference to the death prefab
+	public Transform death;
+
 	// Direction that the player is facing
 	// False if the player is facing left
 	public bool facingRight = true;
 
 	// Height to respawn player after death
-	public float respawnHeight = 3;
+	public float respawnHeight = 4;
 
 
 	/*****************************************/
@@ -110,6 +113,8 @@ public class PlayerScript : MonoBehaviour {
 		gm.ReleaseBallOnDeath(playerNum);
 		// Make the player invisible
 		renderer.enabled = false;
+		Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+		Instantiate (death, new Vector2 (transform.position.x, transform.position.y), rotation);
 		// Remove the player from the scene
 		transform.position = new Vector2 (-5000, -5000);
 		// Wait 5 seconds

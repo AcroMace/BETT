@@ -5,6 +5,7 @@ TagManager:
   tags:
   - Hoop
   - Obstacle
+  - Death
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -46,6 +47,10 @@ TagManager:
   - name: Background
     userID: 1
     uniqueID: 3544210427
+    locked: 0
+  - name: Death
+    userID: 7
+    uniqueID: 3215051123
     locked: 0
   - name: Trampoline
     userID: 3

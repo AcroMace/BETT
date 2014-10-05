@@ -86,8 +86,9 @@ MonoBehaviour:
   playerNum: 1
   otherPlayer: {fileID: 0}
   gm: {fileID: 0}
+  death: {fileID: 0}
   facingRight: 1
-  respawnHeight: 3
+  respawnHeight: 4
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
