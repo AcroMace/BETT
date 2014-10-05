@@ -25,6 +25,9 @@ public class GameManagerScript : MonoBehaviour {
 	// Maximum number of obstacles on the scene
 	public int maximumObstacles = 5;
 
+	// Rate at which new obstacles spawn in seconds
+	public float secPerSpawn = 5f;
+
 
 	/*****************************************/
 	/* Private variables                     */
@@ -47,7 +50,7 @@ public class GameManagerScript : MonoBehaviour {
 	// (-4,2) should be at obstacleGrid[0][6]
 	private bool[,] obstacleGrid = new bool[8, 8];
 	private int obstacleMaxX = 4;
-	private int obstacleMaxY = 4;
+	private int obstacleMaxY = 3;
 
 	// Current number of obstacles on the screen
 	private int numObstacles = 0;
@@ -144,7 +147,7 @@ public class GameManagerScript : MonoBehaviour {
 			print ("Max obstacles too high, decreasing the amount");
 			maximumObstacles = actualMaxObstacles;
 		}
-		InvokeRepeating ("SpawnObstacle", 3, 3f);
+		InvokeRepeating ("SpawnObstacle", 3, secPerSpawn);
 	}
 	
 	// Update is called once per frame
