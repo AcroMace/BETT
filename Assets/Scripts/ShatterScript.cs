@@ -10,6 +10,7 @@ public class ShatterScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Destroy the particle system
 		Destroy (this.gameObject, 3);
 		Destroy (this);
 	}

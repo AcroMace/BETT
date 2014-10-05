@@ -58,6 +58,8 @@ public class PlayerScript : MonoBehaviour {
 		spawnPosition.y = respawnHeight;
 		transform.position = spawnPosition;
 		rigidbody2D.velocity = new Vector2 (0, 0);
+		// Make the player visible again
+		renderer.enabled = true;
 	}
 
 	// Horizontal flip of where the player spawns
@@ -144,9 +146,12 @@ public class PlayerScript : MonoBehaviour {
 		Kill ();
 		// Wait 5 seconds
 		yield return new WaitForSeconds(respawnTime);
-		Reset ();
-		// Make the player visible again
-		renderer.enabled = true;
+		// Only reset if the player is dead
+		// Prevents glitching if the game is reset while
+		// a player is dead
+		if (!renderer.enabled) {
+			Reset ();
+		}
 	}
 	
 
