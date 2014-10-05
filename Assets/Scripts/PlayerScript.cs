@@ -120,10 +120,14 @@ public class PlayerScript : MonoBehaviour {
 		// If collided with other player, and the other player
 		// is above you, then respawn
 		if (collided.gameObject.name == otherPlayer.name) {
+			// Current height of players
 			double other_pos = otherPlayer.transform.position.y;
 			double self_pos = transform.position.y;
-//			float self_height = renderer.bounds.size.y;
-			if (other_pos > self_pos) {
+			// Negative of the velocities of players
+			// More negative means likelier to kill other player
+			double other_vel = -otherPlayer.rigidbody2D.velocity.y;
+			double self_vel = -rigidbody2D.velocity.y;
+			if (other_pos * other_vel > self_pos * self_vel) {
 				StartCoroutine("Respawn");
 			}
 		} else if (collided.gameObject.tag == "Obstacle") {

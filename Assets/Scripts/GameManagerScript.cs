@@ -43,11 +43,13 @@ public class GameManagerScript : MonoBehaviour {
 	/* Private variables                     */
 	/*****************************************/
 
+	// Whether or not the game is over
+	// Determines whether the player can restart the game
+	private bool gameIsOver = false;
+
 	// Keep the scores of the players
-	private int player1Score = 0;
-	private int player2Score = 0;
-	private string player1ScoreString = "P1: 0";
-	private string player2ScoreString = "P2: 0";
+	private int[] playerScore = {0,0};
+	private string[] playerScoreString = {"P1: 0", "P2: 0"};
 
 	// Dimensions for the score placement
 	private int scoreWidth = 100;
@@ -82,10 +84,8 @@ public class GameManagerScript : MonoBehaviour {
 	// Called by HoopScript
 	// Points are managed solely by the GameManagerScript
 	public void GivePlayerPoint(int playerNum) {
-		if (playerNum == 1) {
-			player1Score += 1;
-		} else if (playerNum == 2) {
-			player2Score += 1;
+		if (playerNum == 1 || playerNum == 2) {
+			playerScore[playerNum - 1] += 1;
 		}
 		UpdateScoreStrings();
 		FlipScreen();
@@ -96,8 +96,8 @@ public class GameManagerScript : MonoBehaviour {
 		// Reset the basketball
 		basketball.Reset ();
 		// Reset player related variables
-		player1Score = 0;
-		player2Score = 0;
+		playerScore[0] = 0;
+		playerScore[1] = 0;
 		UpdateScoreStrings ();
 		player1.Reset ();
 		player2.Reset ();
@@ -175,11 +175,11 @@ public class GameManagerScript : MonoBehaviour {
 		// Update player 1's score
 		GUI.Label (new Rect (scoreFromSide, scoreFromTop,
 		                     scoreWidth, scoreHeight),
-		           player1ScoreString);
+		           playerScoreString[0]);
 		// Update player 2's score
 		GUI.Label (new Rect (Screen.width - scoreFromSide - scoreWidth,
 		                     scoreFromTop, scoreWidth, scoreHeight),
-		           player2ScoreString);
+		           playerScoreString[1]);
 	}
 
 
@@ -189,8 +189,8 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Update the value of the score strings
 	private void UpdateScoreStrings() {
-		player1ScoreString = "P1: " + player1Score;
-		player2ScoreString = "P2: " + player2Score;
+		playerScoreString[0] = "P1: " + playerScore[0];
+		playerScoreString[1] = "P2: " + playerScore[1];
 	}
 
 	// Delete all objects with a tag

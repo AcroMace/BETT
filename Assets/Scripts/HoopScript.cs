@@ -33,7 +33,7 @@ public class HoopScript : MonoBehaviour {
 		GameObject player = collided.gameObject;
 		if (player.name == PlayerName(playerNum)) {
 			if (gm.basketball.GetBallHolder() == playerNum) {
-				print("Player " + playerNum + " scores!");
+//				print("Player " + playerNum + " scores!");
 				gm.GivePlayerPoint(playerNum);
 				gm.basketball.Reset();
 			}
