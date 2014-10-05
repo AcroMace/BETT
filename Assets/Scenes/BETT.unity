@@ -546,9 +546,11 @@ MonoBehaviour:
   basketball: {fileID: 169463846}
   obstacle: {fileID: 400000, guid: 470cf03ca5f354b2483b7ae4aa414f2f, type: 2}
   background: {fileID: 185756047}
+  winScreen1: {fileID: 400000, guid: cdcc91056df174dedb5286f6d2ce4b3f, type: 2}
+  winScreen2: {fileID: 400000, guid: ab5d585432d6f4bd2b86ecf75cc07cb5, type: 2}
   hoop1: {fileID: 1896131020}
   hoop2: {fileID: 4708012}
-  winScore: 5
+  winScore: 3
   maximumObstacles: 10
   secPerSpawn: 5
 --- !u!4 &710371071

@@ -81,7 +81,9 @@ public class PlayerScript : MonoBehaviour {
 		Quaternion downwards = Quaternion.Euler (90, 0, 0);
 		Instantiate (shatter, new Vector2 (xCoord, yCoord - 0.5f), downwards);
 		// Remove the player from the scene
-		transform.position = new Vector2 (-5000, -5000);
+		// Multiply by playerNum to stop the players from colliding
+		// after death
+		transform.position = new Vector2 (-5000 * playerNum, -5000);
 	}
 
 
@@ -120,14 +122,7 @@ public class PlayerScript : MonoBehaviour {
 		// If collided with other player, and the other player
 		// is above you, then respawn
 		if (collided.gameObject.name == otherPlayer.name) {
-			// Current height of players
-			double other_pos = otherPlayer.transform.position.y;
-			double self_pos = transform.position.y;
-			// Negative of the velocities of players
-			// More negative means likelier to kill other player
-			double other_vel = -otherPlayer.rigidbody2D.velocity.y;
-			double self_vel = -rigidbody2D.velocity.y;
-			if (other_pos * other_vel > self_pos * self_vel) {
+			if (ShouldDieFromCollision()) {
 				StartCoroutine("Respawn");
 			}
 		} else if (collided.gameObject.tag == "Obstacle") {
@@ -153,11 +148,35 @@ public class PlayerScript : MonoBehaviour {
 		// Only reset if the player is dead
 		// Prevents glitching if the game is reset while
 		// a player is dead
-		if (!renderer.enabled) {
+		if (!renderer.enabled && !gm.IsGameOver()) {
 			Reset ();
 		}
 	}
-	
+
+	// Returns true if the player should die
+	// Based on the player's velocity and relative position
+	private bool ShouldDieFromCollision() {
+		// Current height of players
+		// Adding 10 as the position can be negative
+		double other_pos = otherPlayer.transform.position.y + 10f;
+		double self_pos = transform.position.y + 10f;
+		// Negative of the velocities of players
+		// More negative means likelier to kill other player
+		double other_vel = -otherPlayer.rigidbody2D.velocity.y;
+		double self_vel = -rigidbody2D.velocity.y;
+		// If the velocity is negative (the player is moving up),
+		// then cancel the multiplier
+		if (other_vel < 1) {
+			other_vel = 1;
+		} else if (self_vel < 1) {
+			self_vel = 1;
+		}
+		if (other_pos * other_vel > self_pos * self_vel) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	// Face direction of movement
 	private void TurnRight() {

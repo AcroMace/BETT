@@ -6,6 +6,7 @@ TagManager:
   - Hoop
   - Obstacle
   - Death
+  - Menu
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -79,4 +80,8 @@ TagManager:
   - name: Basketball
     userID: 5
     uniqueID: 1339473745
+    locked: 0
+  - name: Menu
+    userID: 10
+    uniqueID: 995169051
     locked: 0

@@ -25,6 +25,10 @@ public class GameManagerScript : MonoBehaviour {
 	// Reference to the background
 	public Transform background;
 
+	// References to the win texts
+	public Transform winScreen1;
+	public Transform winScreen2;
+
 	// References to the hoops
 	public HoopScript hoop1;
 	public HoopScript hoop2;
@@ -88,11 +92,24 @@ public class GameManagerScript : MonoBehaviour {
 			playerScore[playerNum - 1] += 1;
 		}
 		UpdateScoreStrings();
-		FlipScreen();
+		if (playerScore[playerNum - 1] == winScore) {
+			gameIsOver = true;
+			player1.Kill ();
+			player2.Kill ();
+			player1.Kill ();
+			if (playerNum == 1) {
+				Instantiate(winScreen1, Vector2.zero, Quaternion.identity);
+			} else if (playerNum == 2) {
+				Instantiate(winScreen2, Vector2.zero, Quaternion.identity);
+			}
+		} else {
+			FlipScreen();
+		}
 	}
 
 	// Reset the player, basketball, and scores
 	public void Reset() {
+		gameIsOver = false;
 		// Reset the basketball
 		basketball.Reset ();
 		// Reset player related variables
@@ -107,10 +124,12 @@ public class GameManagerScript : MonoBehaviour {
 		// Delete scenary
 		DeleteAllObjectsWithTag ("Obstacle");
 		DeleteAllObjectsWithTag ("Death");
+		DeleteAllObjectsWithTag ("Menu");
 	}
 
+	// Spawns an obstacle on a grid if possible
 	public void SpawnObstacle() {
-		if (numObstacles < maximumObstacles) {
+		if (!gameIsOver && numObstacles < maximumObstacles) {
 			// Only spawn if the spot is available
 			bool foundAvailableCoordinate = false;
 			// (X,Y) coordinates to place the obstacle
@@ -144,6 +163,12 @@ public class GameManagerScript : MonoBehaviour {
 		}
 	}
 
+	// Returns true if game is over
+	// Prevents making the variable public
+	public bool IsGameOver() {
+		return gameIsOver;
+	}
+
 
 	/*****************************************/
 	/* Core game methods                     */
@@ -166,6 +191,9 @@ public class GameManagerScript : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			Reset ();
+		}
+		if (gameIsOver && Input.GetButtonDown("Confirm")) {
+		    Reset ();
 		}
 	}
 
