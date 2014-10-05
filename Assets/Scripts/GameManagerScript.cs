@@ -15,6 +15,7 @@ public class GameManagerScript : MonoBehaviour {
 	public string player2Name = "player2";
 
 	// Reference to the basketball object
+	// Used by: HoopScript, PlayerScript
 	public BasketballScript basketball;
 
 
@@ -38,6 +39,14 @@ public class GameManagerScript : MonoBehaviour {
 	/*****************************************/
 	/* Public methods                        */
 	/*****************************************/
+
+	// Used by PlayerScript when a player dies
+	// playerNum should be the number of the player that died
+	public void ReleaseBallOnDeath(int playerNum) {
+		if (basketball.GetBallHolder() == playerNum) {
+			basketball.ReleasePlayer ();
+		}
+	}
 
 	public void GivePlayerPoint(int playerNum) {
 		if (playerNum == 1) {
@@ -64,11 +73,13 @@ public class GameManagerScript : MonoBehaviour {
 	}
 
 	void OnGUI () {
+		// Apply the custom skin
 		GUI.skin = bettskin;
-		// left, top, width, height
+		// Update player 1's score
 		GUI.Label (new Rect (scoreFromSide, scoreFromTop,
 		                     scoreWidth, scoreHeight),
 		           player1ScoreString);
+		// Update player 2's score
 		GUI.Label (new Rect (Screen.width - scoreFromSide - scoreWidth,
 		                     scoreFromTop, scoreWidth, scoreHeight),
 		           player2ScoreString);

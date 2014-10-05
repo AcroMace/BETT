@@ -13,6 +13,9 @@ public class PlayerScript : MonoBehaviour {
 	// Reference to the other player
 	public PlayerScript otherPlayer;
 
+	// Reference to the game manager
+	public GameManagerScript gm;
+
 
 	/*****************************************/
 	/* Private variables                     */
@@ -24,10 +27,6 @@ public class PlayerScript : MonoBehaviour {
 
 	// Store original position to use in reset
 	private Vector2 originalPosition;
-
-	// Whether the player currently has the ball
-	// Controlled by BasketballScript
-	private bool hasBall = false;
 
 
 	/*****************************************/
@@ -89,6 +88,7 @@ public class PlayerScript : MonoBehaviour {
 
 	// Time out the player for 5 seconds
 	private IEnumerator Respawn() {
+		gm.ReleaseBallOnDeath(playerNum);
 		// Make the player invisible
 		renderer.enabled = false;
 		// Remove the player from the scene

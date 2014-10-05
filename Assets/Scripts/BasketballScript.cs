@@ -37,21 +37,26 @@ public class BasketballScript : MonoBehaviour {
 	
 	// Reset the ball to its original position/velocity
 	public void Reset() {
-		// Reset initial variables
-		ballHolder = 0;
-		playerIsHoldingBall = false;
-		playerReference = null;
-		
 		// Reset position
 		Vector2 originalPosition = new Vector2 (0, 2);
 		transform.position = originalPosition;
-		
-		// Reset velocity
+		// Release player
+		ReleasePlayer();
+	}
+
+	// Stop following the player and re-enable collision
+	// Called when the player dies
+	public void ReleasePlayer() {
+		// Reset the velocity
 		rigidbody2D.velocity = new Vector2 (0, 0);
-		
 		// Re-enable collision detection
 		collider2D.enabled = true;
+		// Reset initial variables related to the player
+		ballHolder = 0;
+		playerIsHoldingBall = false;
+		playerReference = null;
 	}
+
 
 
 	/*****************************************/
