@@ -86,6 +86,8 @@ public class PlayerScript : MonoBehaviour {
 			if (other_pos > self_pos) {
 				StartCoroutine("Respawn");
 			}
+		} else if (collided.gameObject.tag == "Obstacle") {
+			StartCoroutine("Respawn");
 		}
 	}
 	

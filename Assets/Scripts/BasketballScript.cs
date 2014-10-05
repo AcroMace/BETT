@@ -80,7 +80,7 @@ public class BasketballScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collided) {
 		GameObject player = collided.gameObject;
 		// Get reference to the player and enable holding it
-		if (IsPlayer(player.name)) {
+		if (player.tag == "Player") {
 			playerIsHoldingBall = true;
 			ballHolder = PlayerNumber(player.name);
 			playerReference = player;
@@ -93,11 +93,6 @@ public class BasketballScript : MonoBehaviour {
 	/*****************************************/
 	/* Private methods                       */
 	/*****************************************/
-
-	// Return true if the object is a player
-	private bool IsPlayer(string name) {
-		return (name == player1Name || name == player2Name);
-	}
 
 	// Return the player's number given their name
 	private int PlayerNumber(string playerName) {

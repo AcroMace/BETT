@@ -11,12 +11,19 @@ public class GameManagerScript : MonoBehaviour {
 	public GUISkin bettskin;
 
 	// Reference to player objects
+	// Used by: none
 	public PlayerScript player1;
 	public PlayerScript player2;
 
 	// Reference to the basketball object
 	// Used by: HoopScript, PlayerScript
 	public BasketballScript basketball;
+
+	// Reference to obstacle prefab
+	public Transform obstacle;
+	
+	// Maximum number of obstacles on the scene
+	public int maximumObstacles = 5;
 
 
 	/*****************************************/
@@ -34,6 +41,14 @@ public class GameManagerScript : MonoBehaviour {
 	private int scoreHeight = 50;
 	private int scoreFromTop = 20;
 	private int scoreFromSide = 20;
+
+	// Maximum x and y coordinates for where the obstacle
+	// can spawn
+	private float obstacleMaxX = 5;
+	private float obstacleMaxY = 4;
+
+	// Current number of obstacles on the screen
+	private int numObstacles = 0;
 
 
 	/*****************************************/
@@ -68,6 +83,22 @@ public class GameManagerScript : MonoBehaviour {
 		basketball.Reset ();
 		player1.Reset ();
 		player2.Reset ();
+		// Delete all obstacles
+		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+		int numOfObstacles = obstacles.Length;
+		for (int i = 0; i < numObstacles; i++) {
+			Destroy (obstacles[i]);
+		}
+		numObstacles = 0;
+	}
+
+	public void SpawnObstacle() {
+		if (numObstacles < maximumObstacles) {
+			float obstacleX = Random.Range (-obstacleMaxX, obstacleMaxX);
+			float obstacleY = Random.Range (-obstacleMaxY, obstacleMaxY);
+			Instantiate (obstacle, new Vector2 (obstacleX, obstacleY), Quaternion.identity);
+			numObstacles++;
+		}
 	}
 
 
@@ -77,7 +108,7 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		InvokeRepeating ("SpawnObstacle", 3, 3f);
 	}
 	
 	// Update is called once per frame
