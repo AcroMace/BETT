@@ -17,17 +17,7 @@ public class HoopScript : MonoBehaviour {
 	/*****************************************/
 	/* Core game methods                     */
 	/*****************************************/
-
-	// Use this for initialization
-	void Start () {
-
-	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	// Give the player a point if they score
 	void OnTriggerEnter2D (Collider2D collided) {
 		GameObject player = collided.gameObject;

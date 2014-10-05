@@ -16,6 +16,10 @@ public class PlayerScript : MonoBehaviour {
 	// Reference to the game manager
 	public GameManagerScript gm;
 
+	// Direction that the player is facing
+	// False if the player is facing left
+	public bool facingRight = true;
+
 
 	/*****************************************/
 	/* Private variables                     */
@@ -28,9 +32,12 @@ public class PlayerScript : MonoBehaviour {
 	// Store original position to use in reset
 	private Vector2 originalPosition;
 
+	// Vector when the player faces right
+	private float rightDirection;
+
 
 	/*****************************************/
-	/* Private methods                       */
+	/* Public methods                        */
 	/*****************************************/
 
 	public void Reset() {
@@ -47,7 +54,12 @@ public class PlayerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		originalPosition = transform.position;
+		rightDirection = transform.localScale.x;
+		if(!facingRight) {
+			TurnLeft();
+		}
 	}
+
 
 	// Update for physics
 	void FixedUpdate() {
@@ -57,8 +69,10 @@ public class PlayerScript : MonoBehaviour {
 		}
 		if (Input.GetButton (GetButtonName("Right"))) {
 			rigidbody2D.AddForce (new Vector2(velocityX, 0));
+			TurnRight();
 		} else if (Input.GetButton (GetButtonName ("Left"))) {
 			rigidbody2D.AddForce (new Vector2(-velocityX, 0));
+			TurnLeft();
 		}
 	}
 
@@ -73,7 +87,6 @@ public class PlayerScript : MonoBehaviour {
 				StartCoroutine("Respawn");
 			}
 		}
-
 	}
 	
 
@@ -98,6 +111,16 @@ public class PlayerScript : MonoBehaviour {
 		Reset ();
 		// Make the player visible again
 		renderer.enabled = true;
+	}
+
+	// Face direction of movement
+	private void TurnRight() {
+		facingRight = true;
+		transform.localScale = new Vector2(rightDirection, transform.localScale.y);
+	}
+	private void TurnLeft() {
+		facingRight = false;
+		transform.localScale = new Vector2(-rightDirection, transform.localScale.y);
 	}
 
 }

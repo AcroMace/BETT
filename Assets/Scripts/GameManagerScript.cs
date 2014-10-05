@@ -44,10 +44,13 @@ public class GameManagerScript : MonoBehaviour {
 	// playerNum should be the number of the player that died
 	public void ReleaseBallOnDeath(int playerNum) {
 		if (basketball.GetBallHolder() == playerNum) {
-			basketball.ReleasePlayer ();
+			basketball.ReleasePlayer();
 		}
 	}
 
+	// The player with the playerNum receives a point
+	// Called by HoopScript
+	// Points are managed solely by the GameManagerScript
 	public void GivePlayerPoint(int playerNum) {
 		if (playerNum == 1) {
 			player1Score += 1;

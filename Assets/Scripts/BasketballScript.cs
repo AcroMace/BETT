@@ -63,11 +63,6 @@ public class BasketballScript : MonoBehaviour {
 	/* Core game methods                     */
 	/*****************************************/
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		// Fix the basketball's position to the player's position
