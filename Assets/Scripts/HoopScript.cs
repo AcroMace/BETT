@@ -10,11 +10,8 @@ public class HoopScript : MonoBehaviour {
 	// Player who can score on this net
 	public int playerNum = 1;
 
-	// Reference to the basketball
-	public BasketballScript basketball;
-
 	// Reference to the game manager
-	public GameManagerScript gamemanager;
+	public GameManagerScript gm;
 
 
 	/*****************************************/
@@ -35,10 +32,10 @@ public class HoopScript : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D collided) {
 		GameObject player = collided.gameObject;
 		if (player.name == PlayerName(playerNum)) {
-			if (basketball.GetBallHolder() == playerNum) {
+			if (gm.basketball.GetBallHolder() == playerNum) {
 				print("Player " + playerNum + " scores!");
-				gamemanager.GivePlayerPoint(playerNum);
-				basketball.Reset();
+				gm.GivePlayerPoint(playerNum);
+				gm.basketball.Reset();
 			}
 		}
 	}

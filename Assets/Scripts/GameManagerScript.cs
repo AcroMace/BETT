@@ -10,6 +10,13 @@ public class GameManagerScript : MonoBehaviour {
 	// Skin for custom fonts
 	public GUISkin bettskin;
 
+	// Player names
+	public string player1Name = "player1";
+	public string player2Name = "player2";
+
+	// Reference to the basketball object
+	public BasketballScript basketball;
+
 
 	/*****************************************/
 	/* Private variables                     */
